@@ -1,0 +1,17 @@
+name: Add To GitHub projects
+
+on:
+  workflow_call:
+   secrets:
+      github-token:
+        required: true
+
+jobs:
+  add-to-project:
+    name: Add issue or pr to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/paritytech/projects/44
+          github-token: ${{ secrets.github-token }}
