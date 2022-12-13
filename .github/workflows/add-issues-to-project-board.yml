@@ -6,13 +6,20 @@ on:
       - opened
       - labeled
   workflow_call:
+    inputs:
+      github-token:
+        description: 'A token generated with tibdex/github-app-token community action'
+        default: ''
+        required: true
+        type: string
     secrets:
       APP_ID:
         required: true
       PRIVATE_KEY: 
         required: true
-      PROJECT_URL: 
+      PROJECT_URL:
         required: true
+    
 jobs:
   add_issues_to_project_board:
     runs-on: ubuntu-latest
