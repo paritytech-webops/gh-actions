@@ -6,12 +6,6 @@ on:
       - opened
       - labeled
   workflow_call:
-    inputs:
-      github-token:
-        description: 'A token generated with tibdex/github-app-token community action'
-        default: ' '
-        required: false
-        type: string
     secrets:
       APP_ID:
         required: true
