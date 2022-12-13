@@ -6,7 +6,13 @@ on:
       - opened
       - labeled
   workflow_call:
-
+    secrets:
+      APP_ID:
+        required: true
+      PRIVATE_KEY: 
+        required: true
+      PROJECT_URL: 
+        required: true
 jobs:
   add_issues_to_project_board:
     runs-on: ubuntu-latest
@@ -21,5 +27,5 @@ jobs:
       - name: Add issues to project board
         uses: actions/add-to-project@v0.3.0
         with:
-          project-url: https://github.com/orgs/paritytech/projects/44
+          project-url: ${{ secrets.PROJECT_URL }}
           github-token: ${{ steps.generate_token.outputs.token }}
