@@ -1,0 +1,31 @@
+name: Add issues to project board
+
+on:
+  workflow_call:
+    secrets:
+      APP_ID:
+        required: true
+      PRIVATE_KEY: 
+        required: true
+    inputs:
+      project-url:
+        required: true
+        type: string
+    
+jobs:
+  add_issues_to_project_board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1.7.0
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+      - name: Move issues to repository
+        env:
+          TOKEN: ${{ steps.generate_token.outputs.token }}
+        uses: actions/add-to-project@v0.4.0 
+        with:
+          project-url: ${{ inputs.project-url }}
+          github-token: ${{ env.TOKEN }}
