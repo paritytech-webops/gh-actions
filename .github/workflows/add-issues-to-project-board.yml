@@ -10,7 +10,7 @@ on:
       github-token:
         description: 'A token generated with tibdex/github-app-token community action'
         default: ''
-        required: true
+        required: false
         type: string
     secrets:
       APP_ID:
@@ -33,6 +33,8 @@ jobs:
           private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Add issues to project board
         uses: actions/add-to-project@v0.3.0
+        env: 
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         with:
           project-url: ${{ secrets.PROJECT_URL }}
-          github-token: ${{ steps.generate_token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
