@@ -29,3 +29,5 @@ jobs:
         with:
           project-url: ${{ inputs.project-url }}
           github-token: ${{ env.TOKEN }}
+          labeled: dependencies
+          label-operator: NOT
